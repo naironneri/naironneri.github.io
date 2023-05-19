@@ -1,0 +1,265 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Propensão de compra com ranqueamento de clientes</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<style>
+			.tabela {
+				border:2px sólido #C0C0C0;
+				border-collapse:colapso;
+				padding:5px;
+			}
+			.tabela th {
+				border:2px sólido #C0C0C0;
+				padding:5px;
+				background:#D1D1D1;
+			}
+			.tabela td {
+				border:2px sólido #C0C0C0;
+				padding:5px;
+			}
+		</style>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Página Inicial do Portifólio</strong></a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>Propensão de compra com ranqueamento de clientes</h1>
+									</header>
+
+									<!--<span class="image main"><img src="images/pic11.jpg" alt="" /></span>-->
+
+									<h2>1 – O problema de negócio e a visão geral dos dados</h3>
+
+									<h3>1.1 – O problema de Negócio</h3>
+									<p>Uma empresa de seguros possui clientes que adquiriram um seguro de saúde e agora ela deseja vender um segundo seguro (estratégia conhecida como cross selling), porém, dessa vez um seguro veicular. A limitação atual é que a equipe que entrará em contato com os clientes é limitada e a base de cliente é muito grande, sendo assim, será preciso priorizar os clientes com o perfil mais adequado ao seguro de saúde. Ao final, a seguradora precisará de uma lista ordenada iniciando pelos clientes mais propensos.</p>									
+									
+
+									<h3>1.2 – Visão geral sobre os dados</h3>
+									<p>Os utilizados foram obtidos através da plataforma Kaggle: <a href="https://www.kaggle.com/datasets/anmolkumar/health-insurance-cross-sell-prediction ">https://www.kaggle.com/datasets/anmolkumar/health-insurance-cross-sell-prediction</a></p>									
+									
+									<table class="tabela">										
+										<thead>
+										<tr>
+											<th>Atributo</th>
+											<th>Descrição</th>
+										</tr>
+										</thead>
+										<tbody>
+										<tr>
+											<td>Id</td>
+											<td>Um identificador único que representa um cliente.</td>
+										</tr>
+										<tr>
+											<td>Gender</td>
+											<td>Sexo do cliente.</td>
+										</tr>
+										<tr>
+											<td>Age</td>
+											<td>Idade do cliente.</td>
+										</tr>
+										<tr>
+											<td>Driving_License</td>
+											<td>0: cliente não habilitação; 1: cliente possui habilitação.</td>
+										</tr>
+										<tr>
+											<td>Region_Code</td>
+											<td>Código único da região do cliente.</td>
+										</tr>
+										<tr>
+											<td>Previously_Insured</td>
+											<td>0: o cliente não possui seguro; 1: o cliente já possui seguro.</td>
+										</tr>
+										<tr>
+											<td>Vehicle_Age</td>
+											<td>Idade do veículo.<br></td>
+										</tr>
+										<tr>
+											<td>Vehicle_Damage</td>
+											<td>0: o cliente nunca teve o seu veículo danificado; 1: o cliente já teve o seu veículo danificado.</td>
+										</tr>
+										<tr>
+											<td>Annual_Premium</td>
+											<td>Valor pago anualmente pelo seguro.</td>
+										</tr>
+										<tr>
+											<td>Policy_Sales_Channel</td>
+											<td>Código do canal de divulgação para o cliente. Pode ser correio, por telefone, pessoalmente...</td>
+										</tr>
+										<tr>
+											<td>Vintage</td>
+											<td>Número de dias em que o cliente possui relacionamento com a empresa pela compra do seguro de saúde.</td>
+										</tr>
+										<tr>
+											<td>Response</td>
+											<td>0: o cliente não está interessado no seguro; 1: o cliente está interessado no seguro.</td>
+										</tr>										
+										<tbody>
+									</table>
+									
+
+									<h3>1.4 – Premissas do negócio:</h3>
+									<ul>
+										<li>Nenhuma coluna do conjunto de dados possui dados faltantes.</li>										
+									</ul>
+									
+
+									<hr class="major" />
+
+									<h2>2 – Planejamento da Solução:</h2>
+									<p>Foi aplicada a metodologia CRISP-DM para este projeto. Tal metodologia permite que o projeto seja realizado em ciclos, sendo que após a finalização de um ciclo, avalia-se a solução e pode-se iterar novamente em busca de melhorar o desempenho da solução. </p>									
+
+									<h3>Passo 01 - Descrição dos dados</h3>
+									<p>Nesse passo, os objetivos foram:</p>
+									<ul>
+										<li>Conhecer a dimensão dos dados</li>
+										<li>Verificar o formato dos dados (numérico ou categórico)</li>
+										<li>Renomear colunas</li>
+										<li>Verificar valores faltantes e efetuar o tratamento</li>
+										<li>Utilizar estatística para verificar outliers</li>
+										<li>Gerar e analisar métricas estatísticas como: média, mediana, mínimo, máximo, range (intervalo), skew, kurtosis e desvio padrão.</li>
+									</ul>
+
+									<h3>Passo 02 - Feature Engineering</h3>
+									<p>Nesse passo o atributo vehicle_age recebeu 3 valores: over_2_years, between_1_2_year e below_1_year. O atributo vehicle_damage recebeu os valores 0 e 1 em substituição de No e Yes, respectivamente.</p>									
+
+									<h3>Passo 03 - Filtragem de variáveis</h3>
+									<p>Nesse primeiro ciclo não foi preciso filtrar nenhuma variável.</p>
+
+									<h3>Passo 04 - Análise Exploratória dos dados (EDA)</h3>
+									<p>Os objetivos desse passo foram explorar os dados em busca de insights, entender melhor como as variáveis impactam a variável alvo (response) e melhorar o entendimento do negócio. Foram realizadas análises univariadas, bivariadas e multivariadas nos dados numéricos e categóricos.</p>
+
+									<h3>Passo 05 - Preparação dos dados</h3>
+									<p>Nesse passo o objetivo foi colocar as variáveis na mesma escala para melhorar o desempenho dos algoritmos de Machine Learning. Foram utilizadas as técnicas conhecidas como Standardization, Rescaling e Transformation (por meio de encodings).</p>
+
+									<h3>Passo 06 – Seleção de Features (recursos)</h3>
+									<p>O objetivo desse passo foi reduzir o número de variáveis selecionando aquelas que possuem maior relação com a variável resposta. O algoritmo Boruta foi utilizado nesse passo para destacar as variáveis que melhor explicam o fenômeno.</p>
+
+									<h3>Passo 07 - Modelagem de Machine Learning</h3>
+									<p>Nesse passo foram realizados testes com alguns modelos de Machine Learning a fim de identificar o melhor para o projeto. Os modelos testados foram: KNN, Logistic Regression, Extra Trees e LGBM. </p>
+									
+									<h3>Passo 08 - Hyperparameter Fine Tunning</h3>
+									<p>Não foi realizado o Fine Tunning nesse primeiro ciclo.</p>
+
+									<h3>Passo 09 - Performance de negócio</h3>
+									<p>O objetivo desse passo foi avaliar o desempenho do modelo preditivo e verificar se ele está em condições de ser publicado em produção. </p>									
+
+									<h3>Passo 10 - Deploy do modelo em produção</h3>
+									<p>Essa etapa visa a disponibilização do modelo em produção para que outras pessoas possam realizar as predições. O modelo foi disponibilizado na plataforma Render através de uma API.</p>
+
+									<h3>Passo 11 - Planilha Google</h3>
+									<p>Para facilitar o uso do modelo, foi criado um uma planilha no Google, que permite entrar com os dados de um novo cliente, enviar esses dados para o modelo de machine learning treinado e obter o resultado do “score” do cliente em relação ao interesse em contratar o seguro veicular.</p>									
+
+									<hr class="major" />
+
+									
+									<h2>3 – Performance dos modelos de Machine Leaning</h2>
+									<p>Por se tratar de um projeto de aprendizado para ranqueamento, as métricas utilizadas para avaliar o modelo foram a Precision@k e Recall@k, que realizam o calculo de Precision e Recall até um determinada posição do ranking.</p>
+									<p>A performance dos modelos pode ser observada na tabela abaixo:</p>
+
+
+									<table class="tabela">										
+										<thead>
+										<tr>
+											<th>Modelo</th>
+											<th>Precision@K</th>
+											<th>Recall@K</th>
+										</tr>
+										</thead>
+										<tbody>
+										<tr>
+											<td>LGBM</td>
+											<td>0.368302</td>
+											<td>0.471718</td>
+										</tr>
+										<tr>
+											<td>KNN</td>
+											<td>0.336388</td>
+											<td>0.4308431</td>
+										</tr>
+										<tr>
+											<td>Extra Trees</td>
+											<td>0.318473</td>
+											<td>0.407897</td>
+										</tr>
+										<tr>
+											<td>Logistic Regression</td>
+											<td>0.305641</td>
+											<td>0.391462</td>
+										</tr>										
+										<tbody>
+									</table>
+									
+									<p>Nos gráficos a seguir pode ser observada a curva ROC (ganho acumulado) de cada um dos modelos:</p>
+
+									<p style="text-align: center; margin-bottom: 0px;">Algoritmo LGBM:</p>
+									<div style="text-align: center;"><img src="images/projeto2/figura1.png" alt="Curva ROC LGBM" /></div>
+									
+									<p style="text-align: center; margin-top: 30px; margin-bottom: 0px;">Algoritmo KNN:</p>
+									<div style="text-align: center;"><img src="images/projeto2/figura2.png" alt="Curva ROC KNN" /></div>
+
+									<p style="text-align: center; margin-top: 30px; margin-bottom: 0px;">Algoritmo Extra Trees:</p>
+									<div style="text-align: center;"><img src="images/projeto2/figura3.png" alt="Curva ROC Extra Trees" /></div>
+
+									<p style="text-align: center; margin-top: 30px; margin-bottom: 0px;">Algoritmo Logistic Regression:</p>
+									<div style="text-align: center;"><img src="images/projeto2/figura4.png" alt="Curva ROC Logistc Regression" /></div>
+
+									<p>Através da curva ROC é possível estimar o ganho do algoritmo em relação ao número de exemplos.</p>
+									<p>Conclusões sobre os gráficos acima:</p>
+									<ul>
+										<li>O algoritmo LGBM possui a melhor curva dentre todos os algoritmos testados. É possível alcançar quase 60% dos clientes interessados no seguro veicular entrando em contato com apenas 20% da base de clientes. É possível alcançar 90% dos clientes interessados com 40% dos clientes da base.</li>
+										<li>Nos algoritmos KNN, Extra Trees e Logistic Regression é possível alcançar cerca de 85% dos clientes interessados no seguro veicular entrando em contato com 40% da base de clientes.</li>
+										<li>Em todos os algoritmos, entrando em contato com cerca de 60% dos clientes, é possível atingir todos os clientes interessados no seguro veicular.</li>										
+									</ul>
+									<p>Com base nessa análise, para esse primeiro ciclo foi o algoritmo escolhido foi o LGBM, por ter se mostrado um algoritmo rápido e com resultado melhor que os demais testados.</p>
+
+									<h2>4 – Resultados</h2>
+									<p>Abaixo a lista de exemplo com os 20 clientes mais propensos a comprarem o seguro veicular de acordo com o algoritmo de Machine Learning:</p>
+									<div style="text-align: center;"><img src="images/projeto2/figura5.png" alt="Resultados" /></div>
+									<p>Apesar do conjunto de dados possuir poucas informações relevantes sobre os clientes, o objetivo do projeto foi concluído, pois permite que a área de negócio responsável por entrar em contato com os clientes tenha a lista ordenada pelos clientes mais propensos.</p>
+
+									<h4>Planilha Google</h4>
+									<p>A planilha do Google está integrada com o modelo treinado e hospedado na cloud do Render.</p>
+									<p>Para atualizar a planilha após a inserção ou modificação dos dados, basta clicar no menu "Health Insurance Prediction" e selecionar a opção "Get Prediction". A primeira predição pode demorar um pouco, pois o modelo está hospedado no Render e quando o serviço não é usado por um período de tempo ele entrar no estado de suspensão temporária.</p>
+									<p>Link da planilha: <a href="https://docs.google.com/spreadsheets/d/1LXxwRLfAiYaV4wmfEw8sjZUb85G7z2u2YLAk5Jzxolw/edit?usp=sharing" target="_blank">https://docs.google.com/spreadsheets/d/1LXxwRLfAiYaV4wmfEw8sjZUb85G7z2u2YLAk5Jzxolw/edit?usp=sharing</a></p>									
+									<p>Exemplo da planilha:</p>
+									<div style="text-align: center;"><img src="images/projeto2/figura1_planilha.png" alt="Exemplo planilha" /></div>
+
+									<p>A documentação e os códigos utilizados podem ser consultados através do repositório do Github.</p>
+
+								</section>
+
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

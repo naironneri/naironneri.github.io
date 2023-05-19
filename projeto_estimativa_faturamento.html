@@ -1,0 +1,246 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Estimativa de faturamento para uma rede de lojas</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<style>
+			.tabela {
+				border:2px sólido #C0C0C0;
+				border-collapse:colapso;
+				padding:5px;
+			}
+			.tabela th {
+				border:2px sólido #C0C0C0;
+				padding:5px;
+				background:#D1D1D1;
+			}
+			.tabela td {
+				border:2px sólido #C0C0C0;
+				padding:5px;
+			}
+		</style>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Página Inicial do Portifólio</strong></a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>Estimativa de faturamento para uma rede de lojas</h1>
+									</header>
+
+									<!--<span class="image main"><img src="images/pic11.jpg" alt="" /></span>-->
+
+									<h2>1 – O problema de negócio e a visão geral dos dados</h3>
+
+									<p>Com 56.500 funcionários na Europa e um total de 4.361 filiais, incluindo 2.231 na Alemanha, o grupo de empresas ROSSMANN é uma das maiores redes de drogarias da Europa. Em 2021, o Grupo ROSSMANN alcançou vendas de 11,1 bilhões de euros na Alemanha, Polônia, Hungria, República Tcheca, Albânia, Kosovo, Espanha e Turquia. (Fonte: site da Rossmann)</p>									
+
+									<h3>1.1 – O problema de Negócio</h3>
+									<p>O CFO da Rossmann precisa prever o faturamento das próximas 6 semanas de suas lojas para que os dados sirvam de base para a tomada de decisão sobre o quanto investir na reforma de cada uma das lojas. As vendas das lojas são influenciadas por muitos fatores, incluindo promoções, competição, feriados escolares e estaduais, sazonalidade e localidade. O modelo atual (baseline) não atende às necessidades da empresa, por esse motivo houve a necessidade de um modelo mais refinado baseado em Machine Learning.</p>									
+									
+
+									<h3>1.2 – Visão geral sobre os dados</h3>
+									<p>Os utilizados foram obtidos através da plataforma Kaggle: <a href="https://www.kaggle.com/c/rossmann-store-sales/data">https://www.kaggle.com/c/rossmann-store-sales/data</a></p>									
+									
+									<table class="tabela">										
+										<thead>
+										<tr>
+											<th>Atributo</th>
+											<th>Descrição</th>
+										</tr>
+										</thead>
+										<tbody>
+										<tr>
+											<td>Id</td>
+											<td>Um Id que representa uma duplicata (Store, Date) dentro do conjunto de teste.</td>
+										</tr>
+										<tr>
+											<td>Store</td>
+											<td>Um id único para cada loja.</td>
+										</tr>
+										<tr>
+											<td>Sales</td>
+											<td>O volume de vendas em um determinado dia (variável alvo).</td>
+										</tr>
+										<tr>
+											<td>Customers</td>
+											<td>O número de clientes em um determinado dia.</td>
+										</tr>
+										<tr>
+											<td>Open</td>
+											<td>Um indicador para saber se a loja estava aberta: 0 = fechada, 1 = aberta.</td>
+										</tr>
+										<tr>
+											<td>StateHoliday</td>
+											<td>Indica um feriado estadual. Normalmente todas as lojas, com poucas exceções, fecham nos feriados estaduais. Todas as escolas fecham nos feriados e finais de semana. a = feriado, b = feriado da Páscoa, c = Natal, 0 = Nenhum.</td>
+										</tr>
+										<tr>
+											<td>SchoolHoliday</td>
+											<td>Indica se (Store, Date) foi afetada pelo fechamento de escolas públicas.</td>
+										</tr>
+										<tr>
+											<td>StoreType</td>
+											<td>Diferencia entre 4 modelos de loja diferentes: a, b, c, d.</td>
+										</tr>
+										<tr>
+											<td>Assortment</td>
+											<td>Descreve um nível de sortimento: a = básico, b = extra, c = estendido.</td>
+										</tr>
+										<tr>
+											<td>CompetitionDistance</td>
+											<td>Distância em metros até a loja concorrente mais próxima.</td>
+										</tr>
+										<tr>
+											<td>CompetitionOpenSince[Month/Year]</td>
+											<td>Fornece mês e o ano e mês aproximados em que o concorrente mais próximo foi aberto.</td>
+										</tr>
+										<tr>
+											<td>Promo</td>
+											<td>Indica se uma loja está fazendo uma promoção naquele dia.</td>
+										</tr>
+										<tr>
+											<td>Promo2</td>
+											<td>É uma promoção contínua e consecutiva para algumas lojas: 0 = a loja não está participando, 1 = a loja está participando.</td>
+										</tr>
+										<tr>
+											<td>Promo2Since[Year/Week]</td>
+											<td>Descreve o ano e a semana em que a loja começou a participar da Promo2.</td>
+										</tr>
+										<tr>
+											<td>PromoInterval</td>
+											<td>Descreve os intervalos consecutivos em que a Promo2 é iniciada, nomeando os meses em que a promoção é iniciada novamente. Por exemplo. "Fev, maio, agosto, novembro" significa que cada rodada começa em fevereiro, maio, agosto, novembro de qualquer ano para essa loja.</td>
+										</tr>
+										<tbody>
+									</table>
+									
+
+									<h3>1.4 – Premissas do negócio:</h3>
+									<ul>
+										<li>Para valores ausentes na coluna “CompetitionDistance” (distância mais próxima de um concorrente) foi considerado a distância de 200.000 metros.</li>
+										<li>Para valores ausentes na coluna CompetitionOpenSince[Month/Year] (o ano e o mês aproximados em que o concorrente mais próximo foi aberto), foi considerado a data de abertura da loja.</li>
+										<li>Foram consideradas apenas lojas com valor de venda maior que 0.</li>
+									</ul>
+									
+
+									<hr class="major" />
+
+									<h2>2 – Planejamento da Solução:</h2>
+									<p>Foi aplicada a metodologia CRISP-DM para este projeto. Tal metodologia permite que o projeto seja realizado em ciclos, sendo que após a finalização de um ciclo, avalia-se a solução e pode-se iterar novamente em busca de melhorar o desempenho da solução. </p>									
+
+									<h3>Passo 01 - Descrição dos dados</h3>
+									<p>Nesse passo, os objetivos foram:</p>
+									<ul>
+										<li>Conhecer a dimensão dos dados</li>
+										<li>Verificar o formato dos dados (numérico ou categórico)</li>
+										<li>Renomear colunas</li>
+										<li>Verificar valores faltantes e efetuar o tratamento</li>
+										<li>Utilizar estatística para verificar outliers</li>
+										<li>Gerar e analisar métricas estatísticas como: média, mediana, mínimo, máximo, range (intervalo), skew, kurtosis e desvio padrão.</li>
+									</ul>
+
+									<h3>Passo 02 - Feature Engineering</h3>
+									<p>Nesse passo foi criado um mapa mental (mindmap) para gerar as hipóteses. O objetivo do mapa mental é analisar o fenômeno das vendas e identificar as variáveis que impactam nas vendas:</p>
+									<div style="text-align: center;"><img src="images/projeto1/figura1.jpg" alt="Mindmap" /></div>
+
+
+									<h3>Passo 03 - Filtragem de variáveis</h3>
+									<p>Nesse passou houve a filtragem das linhas/colunas que não eram relevantes para o modelo de Machine Learning. Por exemplo, a exclusão da coluna com o número de clientes, já que não é possível prever quantos clientes existirão em cada loja nas próximas 6 semanas (não é a variável alvo, logo, precisaria de outro modelo). Outro exemplo, foi a exclusão das lojas fechadas e das lojas com vendas zeradas.</p>
+
+									<h3>Passo 04 - Análise Exploratória dos dados (EDA)</h3>
+									<p>Os objetivos desse passo foram explorar os dados em busca de insights, entender melhor como as variáveis impactam a variável alvo (sales) e melhor o entendimento do negócio. Foram realizadas análises univariadas, bivariadas e multivariadas nos dados numéricos e categóricos.</p>
+
+									<h3>Passo 05 - Preparação dos dados</h3>
+									<p>Nesse passo o objetivo foi colocar as variáveis na mesma escala para melhorar o desempenho dos algoritmos de Machine Learning. Foram utilizadas as técnicas conhecidas como Rescaling e Transformation (por meio de encodings e nature transformation).</p>
+
+									<h3>Passo 06 – Seleção de Features (recursos)</h3>
+									<p>O objetivo desse passo foi reduzir o número de variáveis selecionando aquelas que possuem maior relação com a variável resposta. O algoritmo Boruta foi utilizado nesse passo para destacar as variáveis que melhor explicam o fenômeno.</p>
+
+									<h3>Passo 07 - Modelagem de Machine Learning</h3>
+									<p>Nesse passo foram realizados testes com alguns modelos de Machine Learning a fim de identificar o melhor para o projeto. Os modelos testados foram: Average, Linear Regression, Lasso Regression, XGBoost Regressor e Random Forest Regressor. Através da técnica conhecida como Cross Validation, foi possível atestar a real performance dos modelos e aumentar a segurança na escolha do modelo mais adequado.</p>
+									<p>A seguir, a comparação entre os modelos após a aplicação do Cross Validation:</p>
+									<div style="text-align: center;"><img src="images/projeto1/figura2.jpg" alt="Comparação dos Modelos" /></div>
+									<p>Apesar do desempenho do Random Forest ser melhor, o modelo escolhido foi o XGBoost Regressor, pois realiza a predição de forma mais rápida e demanda menos memória RAM. Como foi o primeiro ciclo do CRISP, nos próximos ciclos a utilização do modelo Random Forest pode ser avaliada.</p>
+
+									<h3>Passo 08 - Hyperparameter Fine Tunning</h3>
+									<p>Após a escolha do modelo no passo anterior, nesse passo o objetivo foi definir os parâmetros ideias do modelo. Após a definição dos melhores parâmetros, o modelo foi treinado novamente.</p>
+
+									<h3>Passo 09 - Tradução e interpretação de erros</h3>
+									<p>O objetivo desse passo foi avaliar o desempenho do modelo preditivo e verificar se ele está em condições de ser publicado em produção. Os resultados podem ser observados nos gráficos abaixo:</p>
+									<div style="text-align: center;"><img src="images/projeto1/figura3.jpg" alt="Resultado dos modelos" /></div>
+
+									<h3>Passo 10 - Deploy do modelo em produção</h3>
+									<p>Essa etapa visa a disponibilização do modelo em produção para que outras pessoas possam realizar as predições. O modelo foi disponibilizado na plataforma Heroku através de uma API.</p>
+
+									<h3>Passo 11 - Bot do Telegram</h3>
+									<p>Para facilitar o uso do modelo, foi criado um bot no Telegram que permite realizar as previsões em qualquer momento e em qualquer lugar.</p>
+
+
+
+									<hr class="major" />
+
+									<h2>3 - Principais Insights</h2>
+									<p><b>Hipótese 1:</b> Lojas deveriam vender mais ao longo dos anos.
+									</br><b>Resultado:</b> Falsa. Lojas vendem menos ao longo dos anos.</p>
+									<div style="text-align: center;"><img src="images/projeto1/figura4.jpg" alt="Hipotese 1" /></div>
+
+									<p><b>Hipótese 2:</b> Lojas com maior sortimento de produtos deveriam vender mais.
+								    </br><b>Resultado:</b> Falsa. Lojas com maior sortimento vendem menos</p>
+									<div style="text-align: center;"><img src="images/projeto1/figura5.jpg" alt="Hipotese 2" /></div>
+
+									<p><b>Hipótese 3:</b> Lojas com competidores mais próximos deveriam vender menos.
+									</br><b>Resultado:</b> Falsa. Lojas com competidores mais próximos vendem mais.</p>
+									<div style="text-align: center;"><img src="images/projeto1/figura6.jpg" alt="Hipotese 3" /></div>
+
+									<hr class="major" />
+
+									<h2>4 - Performance de Negócio</h2>
+									<p>No gráfico abaixo é possível notar que o modelo obteve um resultado satisfatório para a maioria das lojas (quanto mais próximo de 0 melhor). Para algumas lojas o modelo apresentou erro acima da média, sendo assim, nos próximos ciclos do CRISP será preciso analisar as particularidades dessas lojas para entender os motivos que levaram o modelo a gerar predições com tais erros.</p>
+									<div style="text-align: center; width: 100%;"><img src="images/projeto1/figura7.jpg" alt="Business Performance" /></div>
+
+									<p>Para cada uma das lojas, considerando o pior e o melhor cenário calculado de acordo com a margem de erro do modelo, é possível obter os seguintes dados:</p>
+									<div style="text-align: center;"><img src="images/projeto1/figura8.jpg" alt="Resultado lojas" width="500px"/></div>
+									
+
+									<hr class="major" />
+
+									<h2>5 – Conclusão</h2>
+									<p>O objetivo do projeto foi concluído, pois permite ao CFO gerar as previsões das próximas 6 semanas de qualquer uma das lojas de forma fácil através do Telegram.</p>
+									<p>A documentação e os códigos utilizados podem ser consultados através do repositório do Github.</p>
+
+									
+
+
+								</section>
+
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
